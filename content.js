@@ -10,10 +10,31 @@ function speakProfit() {
 
             // speak the text
             console.log('profit is: ', profit);
+            speakText(profit);
         }
     } catch (e) {
     
     }
+}
+
+function speakText(text) {
+    var audioMap = {
+        '-': 'minus',
+        '.': 'dot'
+    };
+    for (var i = 0; i < text.length; i++) {
+        var fileName = 'audios/';
+        fileName += audioMap[text[i]] ? audioMap[text[i]] : text[i];
+        fileName += '.mp3';
+
+        playAudio(fileName, i*500);
+    }
+}
+
+function playAudio(fileName, delay) {
+    setTimeout(function() {
+        new Audio(chrome.extension.getURL(fileName)).play();
+    }, delay);
 }
 
 window.setInterval(speakProfit, 60000);  // speak once a minute
