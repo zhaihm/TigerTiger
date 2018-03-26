@@ -18,5 +18,11 @@
 
     "web_accessible_resources": [
         "audios/*.mp3"
+    ],
+
+    "options_page": "options.html",
+
+    "permissions": [
+        "storage"
     ]
 }

@@ -1,3 +1,14 @@
+var enableAudio = true;
+var interval = 60;
+chrome.storage.sync.get(['enableAudio', 'interval'], function(items) {
+    enableAudio = items.enableAudio;
+    interval = items.interval;
+
+    if (enableAudio) {
+        window.setInterval(speakProfit, interval * 1000);
+    }
+  });
+
 function speakProfit() {
     try {
         var holdings = document.querySelectorAll('.holdings')[0].getElementsByTagName('table')[0].getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -36,5 +47,3 @@ function playAudio(fileName, delay) {
         new Audio(chrome.extension.getURL(fileName)).play();
     }, delay);
 }
-
-window.setInterval(speakProfit, 60000);  // speak once a minute
